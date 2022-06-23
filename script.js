@@ -1,28 +1,23 @@
 let data =[];
 let totalItems =100;
 let pageSize=10;
-for(let i=1;i<=totalItems; i++){
-    data.push(i);
-}
-
-let ascending=true; 
+let ascending=true;
 let currentPage=1;
 let enablePrv=false;
 let enableNxt=false;
 let filteredRows=[];
-
-
-
-
-
-let tempData = chunk(data,pageSize);
-console.log('Total number of Records:', data.length);
 let totalNumberOfPages=0;
-
 let currentPagestr='';
 let count=1;
 let labelName='';
 let datamap = {};
+let tempData = [];
+for(let i=1;i<=totalItems; i++){
+    data.push(i);
+}
+sortingData(data);
+tempData = chunk(data,pageSize);
+
 for(let sample of tempData){
     totalNumberOfPages++;
     if(totalItems<=pageSize){
@@ -41,13 +36,10 @@ for(let sample of tempData){
             count++;
             continue;
         }else{
-          
             if(sample.length==pageSize){
                 labelName=(((count-1)*pageSize+1)+' - '+(pageSize*count) +' / '+data.length);
-                
             }else{
                 labelName=(((count-1)*pageSize+1)+' - '+(totalItems) +' / '+data.length);
-                
             }
             datamap[count]={
                 labelName,
@@ -59,12 +51,9 @@ for(let sample of tempData){
 }
 
 enableNxt=currentPage<totalNumberOfPages;
-
 function next(){
     if(currentPage<totalNumberOfPages){
         currentPage++;
-    }else{
-        console.log('You are in last page')
     }
     enableNxt=currentPage<totalNumberOfPages;
     enablePrv=currentPage>1;
@@ -81,24 +70,13 @@ function prv(){
 }
 
 function displayData(){
-    console.log('totalNumberOfPages:',totalNumberOfPages);
-    console.log('currentPage',currentPage)
-    console.log('enablePrv',enablePrv);
-    console.log('enableNxt',enableNxt);
     if(totalNumberOfPages!=0){
-        console.log('labelName',datamap[currentPage].labelName);
         filteredRows=datamap[currentPage].data;
         filteredRows=sortingData(filteredRows);
-        console.log('filteredRows',filteredRows)
     }else{
         filteredRows=[];
-        console.log('labelName','');
-        console.log('filteredRows',filteredRows)
     }
-    // 
-    console.log('------------------')
 }
-displayData();
 
 function sortingData(data){
     if(ascending){
@@ -108,33 +86,11 @@ function sortingData(data){
     }
     return data
 }
+
 function sort(){
     ascending=!ascending;
-    console.log(sortingData(filteredRows));
+    sortingData(filteredRows);
 }
-next();
-next();
-
-prv();
-prv();
-prv();
-prv();
-
-
-/*
-
-//totalItems=0;
-//pageSize=50;
-// enablePrv=false;
-// enableNxt=false;
-//labelName='';
-//currentPage=1;
-// startIndex=0;
-// endIndex=0;
-filteredRows=[]
-ascending=true;
-
-*/
 
 function chunk (items, size) {
     const chunks = []
