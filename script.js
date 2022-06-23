@@ -5,7 +5,7 @@ for(let i=1;i<=totalItems; i++){
     data.push(i);
 }
 
-let ascending=true; // Pending
+let ascending=true; 
 let currentPage=1;
 let enablePrv=false;
 let enableNxt=false;
@@ -14,11 +14,11 @@ let filteredRows=[];
 
 
 
-// console.log(data);
+
 let tempData = chunk(data,pageSize);
 console.log('Total number of Records:', data.length);
 let totalNumberOfPages=0;
-// console.table(tempData);
+
 let currentPagestr='';
 let count=1;
 let labelName='';
@@ -41,14 +41,13 @@ for(let sample of tempData){
             count++;
             continue;
         }else{
-            // if(count==2)
+          
             if(sample.length==pageSize){
                 labelName=(((count-1)*pageSize+1)+' - '+(pageSize*count) +' / '+data.length);
-                // console.log('Label Name:', labelName)
+                
             }else{
                 labelName=(((count-1)*pageSize+1)+' - '+(totalItems) +' / '+data.length);
-                // labelName=((pageSize+ 1)+' - '+totalItems+' / '+data.length);
-                // console.log('Label Name:', labelName)
+                
             }
             datamap[count]={
                 labelName,
@@ -136,30 +135,6 @@ filteredRows=[]
 ascending=true;
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function chunk (items, size) {
     const chunks = []
